@@ -37,12 +37,8 @@ do
   if [[ ! $GUESS =~ ^[0-9]+$ ]]
   then
     echo "That is not an integer, guess again:"
-    read GUESS
-    continue
-  fi
-
   # Give hints
-  if [[ $GUESS -gt $SECRET_NUMBER ]]
+  elif [[ $GUESS -gt $SECRET_NUMBER ]]
   then
     echo "It's lower than that, guess again:"
   else
