@@ -10,18 +10,18 @@ SECRET_NUMBER=$(( RANDOM % 1000 + 1 ))
 echo "Enter your username:"
 read USERNAME
 
-# Check if user exists
+# Query user from database
 USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME'")
 
 if [[ -z $USER_ID ]]
 then
-  # New user
+  # New user - display welcome message
   echo "Welcome, $USERNAME! It looks like this is your first time here."
-  # Insert new user
+  # Insert new user into database
   INSERT_USER_RESULT=$($PSQL "INSERT INTO users(username) VALUES('$USERNAME')")
   USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME'")
 else
-  # Existing user
+  # Existing user - retrieve and display game statistics
   GAMES_PLAYED=$($PSQL "SELECT COUNT(*) FROM games WHERE user_id=$USER_ID")
   BEST_GAME=$($PSQL "SELECT MIN(guesses) FROM games WHERE user_id=$USER_ID")
   echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
