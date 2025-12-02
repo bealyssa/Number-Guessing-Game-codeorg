@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Database connection string
 PSQL="psql --username=freecodecamp --dbname=number_guess -t --no-align -c"
 
 # Generate random number between 1 and 1000
