@@ -50,8 +50,8 @@ do
   NUMBER_OF_GUESSES=$((NUMBER_OF_GUESSES + 1))
 done
 
-# Game won
+# Display win message
 echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $SECRET_NUMBER. Nice job!"
 
-# Save game to database
+# Record game result in database
 INSERT_GAME_RESULT=$($PSQL "INSERT INTO games(user_id, guesses) VALUES($USER_ID, $NUMBER_OF_GUESSES)")
